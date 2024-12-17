@@ -44,13 +44,16 @@ void Piece::setColor(const int color)
 	this->_color = color;
 }
 
+
 void Piece::setPosition(const std::string newPosition)
 {
 	this->_position = newPosition;
 }
 
 
-
+Piece::~Piece()
+{
+}
 
 
 

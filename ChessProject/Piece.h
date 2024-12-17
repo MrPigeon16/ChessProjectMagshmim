@@ -7,14 +7,19 @@
 
 class Piece
 {
-
-	Piece(const std::string name, const std::string type, const std::string position, const int color );
+public:
+	// Constructor
+	Piece(const std::string name, const std::string type, const std::string position, const int color);
+	
+	// Destructor
+	virtual ~Piece();
 
 	//getters
 	std::string getPosition() const;
 	std::string getName() const;
 	std::string getType() const;
 	int getColor() const;
+	
 	//setters
 	void setPosition(const std::string newPosition);
 	void setName(const std::string name);
@@ -27,13 +32,16 @@ class Piece
 	virtual std::string move(const std::string newPosition) = 0;
 	virtual bool isLegitMove(const std::string position) = 0;
 
+
+
+
 	
 
 
 
 
 
-protected:
+private:
 
 	std::string _position;
 	std::string _name;
