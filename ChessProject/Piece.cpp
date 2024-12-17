@@ -1,26 +1,32 @@
 #include "Piece.h"
 #include <iostream>
 
-Piece::Piece(const std::string name, const int color, const std::string position)
+Piece::Piece(const std::string name, std::string type, const std::string position, const int color)
 {
-	_name = name;
-	_color = color;
-	_position = position;
+	this->_name = name;
+	this->_position = position;
+	this->_type = type;
+	this->_color = color;
 }
 
 std::string Piece::getPosition() const
 {
-	return _position;
+	return this->_position;
 }
 
 std::string Piece::getName() const
 {
-	return _name;
+	return this->_name;
+}
+
+std::string Piece::getType() const
+{
+	return this->_type;
 }
 
 int Piece::getColor() const
 {
-	return _color;
+	return this->_color;
 }
 
 void Piece::setName(const std::string name)
@@ -28,14 +34,19 @@ void Piece::setName(const std::string name)
 	_name = name;
 }
 
+void Piece::setType(const std::string type)
+{
+	this->_type = type;
+}
+
 void Piece::setColor(const int color)
 {
-	_color = color;
+	this->_color = color;
 }
 
 void Piece::setPosition(const std::string newPosition)
 {
-	_position = newPosition;
+	this->_position = newPosition;
 }
 
 
