@@ -9,25 +9,22 @@
 class Piece
 {
 
-	Piece(std::string name, int color, std::string position);
-
-	virtual ~Piece();
+	Piece(const std::string name, const int color, const std::string position);
 
 	//getters
-	std::string getPosition()
-	{
-		return _position;
-	}
+	std::string getPosition() const;
+	std::string getName() const;
+	int getColor() const;
+	//setters
+	void setName(const std::string name);
+	void setColor(const int color);
+	void setPosition(const std::string newPosition);
 
-	std::string getName()
-	{
-		return _name;
-	}
 
-	int getColor()
-	{
-		return _color;
-	}
+	//implement in the inhertiters
+	//also destructors we need to implement only in the feature
+	virtual std::string move(const std::string newPosition) = 0;
+	virtual bool isLegitMove(const std::string position) = 0;
 
 
 
