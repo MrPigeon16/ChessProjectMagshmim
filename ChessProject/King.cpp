@@ -37,4 +37,4 @@ std::string King::move(const std::string newPosition)
 
 	return returnString;
 
-
+}
