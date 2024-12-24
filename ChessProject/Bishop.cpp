@@ -22,12 +22,12 @@ bool Bishop::isLegitMove(const std::string position)
     std::string currentPostion = getPosition();
     int count_Diagonal_moves = abs(currentPostion[0] - position[0]);
     int count_Stright_moves = abs(currentPostion[1] - position[1]);
-    if (count_Diagonal_moves == count_Stright_moves)
+    if (count_Diagonal_moves != count_Stright_moves)
     {
-        return true;
+        return false;
     }
 
-    return false;
+    return true;
 }
 
 std::string Bishop::move(const std::string newPosition)
