@@ -44,7 +44,15 @@ Piece::~Piece()
 {
 }
 
+/////////////////////////////////
+bool Piece::isItFirstMove() const
+{
+	return this->isItFirstPawnMove;
+}
 
-
+void Piece::changePawnMove(const bool newState)
+{
+	this->isItFirstPawnMove = newState;
+}
 
 

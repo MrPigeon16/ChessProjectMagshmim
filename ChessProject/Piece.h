@@ -44,6 +44,9 @@ public:
 	//also destructors we need to implement only in the feature
 	virtual std::string move(const std::string newPosition) = 0;
 	virtual bool isLegitMove(const std::string position) = 0;
+	////////////////////////////////////////
+	void changePawnMove(const bool newState);
+	bool isItFirstMove() const;
 
 
 
@@ -59,6 +62,8 @@ private:
 	std::string _position;
 	std::string _name;
 	std::string _type;
+
+	bool isItFirstPawnMove;
 
 
 };

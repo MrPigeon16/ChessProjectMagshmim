@@ -3,10 +3,8 @@
 
 
 
-Bishop::Bishop(const std::string name, const std::string type, const std::string position) 
-    : Piece(name, type, position)
+Bishop::Bishop(const string name, const string type, const string position) : Piece(name, type, position)
 {
-
 }
 //D4 C5
 // A - 

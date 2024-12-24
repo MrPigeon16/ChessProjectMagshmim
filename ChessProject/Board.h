@@ -1,6 +1,9 @@
 #pragma once
 #include "stdafx.h"
 #include "Piece.h"
+#include <string>
+#include "Side.h"
+#include <iostream>
 
 
 /*
@@ -39,11 +42,33 @@ public:
 
     Board();
     ~Board();
-    char* startGame();
+
+    bool isWhiteTurn() const;
+    bool isBlackTurn() const;
+    std::string getBoardString() const;
+    void setBoardString(const std::string newBoard);
+
+    void printBoard() const;
+    void eatPiece(const std::string position);
+    bool isSquareTaken(const std::string position);
+    std::string movePieceAtBoard(const std::string source, const std::string destination);
+    void updateBoardString();
+    Piece* createPiece(const std::string name, const std::string type, const std::string position);
+    bool isKingChecked();
+    bool isOneOfBlackPiecesCanReachLocationX(const std::string srcPosition, const std::string destPosition) const;
+    bool isOneOfWhitePiecesCanReachLocationX(const std::string srcPosition, const std::string destPosition) const;
+    bool isThereAnInterrupterPieceAtPath(std::string srcPosition, std::string destPosition) const;
+
+
 
 
 private:
-    
+    std::string board;
+    Side blackSide;
+    Side whiteSide;
+
+
+    void changeTurn();
 
 
 

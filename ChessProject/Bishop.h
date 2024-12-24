@@ -5,6 +5,7 @@ using namespace std;
 
 class Bishop : public Piece
 {
+public:
 	//Consttructor
 	Bishop(const std::string name, const std::string type, const std::string position);
 
