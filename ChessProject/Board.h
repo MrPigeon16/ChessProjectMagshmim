@@ -1,9 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "Piece.h"
-#include <string>
 #include "Side.h"
-#include <iostream>
+
 
 
 /*

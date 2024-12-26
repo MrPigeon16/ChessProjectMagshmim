@@ -2,11 +2,12 @@
 #include "Piece.h"
 #include "Rook.h"
 #include "Bishop.h"
-#include <iostream>
+
 
 class Queen : public Piece
 {
 
+public:
 	// Constructor
 	Queen(const std::string name, const std::string type, const std::string position);
 

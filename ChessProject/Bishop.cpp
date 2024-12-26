@@ -3,18 +3,13 @@
 
 
 
-Bishop::Bishop(const string name, const string type, const string position) : Piece(name, type, position)
+Bishop::Bishop(const string name, const string type, const string position) 
+    : Piece(name, type, position)
 {
-}
-//D4 C5
-// A - 
-// poistion[0] -  letter , Postion[1] - number
 
-/*
-Function will check of both of the poestion have chnage
-input: postion - the new postion the user want to move to
-ouput: return true if good new postion, false if not
-*/
+}
+
+
 bool Bishop::isLegitMove(const std::string position)
 {
     //The user have to move the sqaures in both to move diagonaly
@@ -44,3 +39,4 @@ std::string Bishop::move(const std::string newPosition)
 Bishop::~Bishop()
 {
 }
+

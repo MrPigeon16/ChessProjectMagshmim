@@ -2,7 +2,7 @@
 #include "Piece.h"
 #include <string>
 
-King::King(const std::string name, const std::string type, const std::string position) : Piece(name, type, position)
+King::King(const std::string name, const std::string type, const std::string position) : Piece(name, type, position) 
 {
 }
 

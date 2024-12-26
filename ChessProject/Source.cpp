@@ -1,14 +1,15 @@
 /*
 This file servers as an example of how to use Pipe.h file.
-It is recommended to use the following code in your project, 
+It is recommended to use the following code in your project,
 in order to read and write information from and to the Backend
 */
 
 #include "Pipe.h"
-#include "Board.h"
 #include <iostream>
 #include <thread>
-
+#include "Board.h"
+#include <string>
+#include "Piece.h"
 using std::cout;
 using std::endl;
 using std::string;
@@ -18,10 +19,10 @@ void main()
 {
 	srand(time_t(NULL));
 
-	
+
 	Pipe p;
 	bool isConnect = p.connect();
-	
+
 	string ans;
 	while (!isConnect)
 	{
@@ -35,35 +36,44 @@ void main()
 			Sleep(5000);
 			isConnect = p.connect();
 		}
-		else 
+		else
 		{
 			p.close();
 			return;
 		}
 	}
-	
 
-	Board board;
 
 	char msgToGraphics[1024];
-	// msgToGraphics should contain the board string accord the protocol
-	// YOUR CODE
-	
 
-	strcpy(msgToGraphics, board.startGame());
-	p.sendMessageToGraphics(msgToGraphics);   // send the board string
+	Board gameBoard = *(new Board());
+	string currBoard = gameBoard.getBoardString();
 
-	// get message from graphics
+	strcpy_s(msgToGraphics, currBoard.c_str()); 
+
+	gameBoard.setBoardString(currBoard.substr(0, gameBoard.getBoardString().size() - 1));
+
+	p.sendMessageToGraphics(msgToGraphics);  
+ 
 	string msgFromGraphics = p.getMessageFromGraphics();
 
 	while (msgFromGraphics != "quit")
 	{
-		// should handle the string the sent from graphics
-		// according the protocol. Ex: e2e4  (move e2 to e4)
-		
-		// YOUR CODE
-		strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
+		gameBoard.printBoard();
 
+
+		string source = msgFromGraphics.substr(0, 2);
+		string destination = msgFromGraphics.substr(2, 2);
+
+
+		if (source != destination)
+		{
+			strcpy_s(msgToGraphics, gameBoard.movePieceAtBoard(source, destination).c_str()); 
+		}
+		else
+		{
+			strcpy_s(msgToGraphics, to_string(6).c_str());
+		}
 		/******* JUST FOR EREZ DEBUGGING ******/
 		int r = rand() % 10; // just for debugging......
 		msgToGraphics[0] = (char)(1 + '0');
@@ -72,10 +82,12 @@ void main()
 
 
 		// return result to graphics		
-		p.sendMessageToGraphics(msgToGraphics);   
+		p.sendMessageToGraphics(msgToGraphics);
 
 		// get message from graphics
 		msgFromGraphics = p.getMessageFromGraphics();
+
+		gameBoard.updateBoardString();
 	}
 
 	p.close();

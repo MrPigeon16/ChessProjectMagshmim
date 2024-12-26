@@ -2,8 +2,12 @@
 
 #include <iostream>
 #include <string>
+#include "Board.h"
+
 #define WHITE 1
 #define BLACK 0
+
+using namespace std;
 
 enum GameMoves
 {
@@ -47,11 +51,6 @@ public:
 	////////////////////////////////////////
 	void changePawnMove(const bool newState);
 	bool isItFirstMove() const;
-
-
-
-
-	
 
 
 
