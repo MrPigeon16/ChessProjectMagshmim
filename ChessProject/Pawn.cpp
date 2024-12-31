@@ -8,25 +8,72 @@ Pawn::Pawn(const std::string name, const std::string type, const std::string pos
 
 bool Pawn::isLegitMove(const string position)
 {
-	std::string currentPosition = getPosition();
-	int sumSquare = position[1] - currentPosition[1];
-	if (sumSquare == 2 || sumSquare == 1)
+	string currPosition = getPosition();
+	bool straightOnce = false;
+
+	//black can move 1 forward which is backward for white
+	if (isItFirstMove())
 	{
-		return true;
+		if (this->getName() == "P")
+		{
+			straightOnce = ((currPosition[1] - position[1] == -2) || (currPosition[1] - position[1] == -1)) && (currPosition[0] - position[0] == 0);
+		}
+		else
+		{
+			straightOnce = (currPosition[1] - position[1] == 2) || (currPosition[1] - position[1] == 1) && (currPosition[0] - position[0] == 0);
+		}
+
 	}
-	return false;
+	else
+	{
+		if (this->getName() == "P")
+		{
+			straightOnce = currPosition[1] - position[1] == -1 && (currPosition[0] - position[0] == 0);
+		}
+		else
+		{
+			straightOnce = currPosition[1] - position[1] == 1 && (currPosition[0] - position[0] == 0);
+		}
+
+	}
+
+	return straightOnce;
 }
 
 
+bool Pawn::isLegitEatingMove(const string position)
+{
+	string currPosition = getPosition();
+
+	bool diagonalOnce = false;
+
+	//black can eat 1 diagonal forward which is backward for white
+	if (getName() == "P")
+	{
+		diagonalOnce = currPosition[1] - position[1] == -1 && std::abs(currPosition[0] - position[0]) == 1;
+	}
+	else
+	{
+		diagonalOnce = currPosition[1] - position[1] == 1 && std::abs(currPosition[0] - position[0]) == 1;
+	}
+
+	return diagonalOnce;
+}
 
 string Pawn::move(const string newPosition)
 {
-	if (isLegitMove(newPosition))
+	string returnString = to_string(INVALID_ILLEGAL_MOVE);
+	if (isLegitMove(newPosition) || isLegitEatingMove(newPosition))
 	{
+		if (isItFirstMove())
+		{
+			changePawnMove(false);
+		}
 		setPosition(newPosition);
-		return to_string(VALID_MOVE);
+		returnString = to_string(VALID_MOVE);
 	}
-	return to_string(INVALID_ILLEGAL_MOVE);
+
+	return returnString;
 }
 
 

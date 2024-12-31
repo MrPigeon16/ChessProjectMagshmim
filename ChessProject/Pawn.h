@@ -9,8 +9,8 @@ public:
 	virtual std::string move(const std::string newPosition) override;
 	virtual bool isLegitMove(const std::string position) override;
 
+	bool isLegitEatingMove(const string position);
 
-	bool isTaken(string position ,Board& b);
 	// Destructor
 	~Pawn();
 
